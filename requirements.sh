@@ -3,8 +3,6 @@ set -e
 
 ##### Install specific package versions with pip #####
 
-# pip3 install pandas==0.22.0
-# pip3 install matplotlib==2.1.2
-# pip3 install scikit-learn==0.19.1
-
-
+pip3 install pandas==0.21.0
+# pip3 install tweepy==3.5.0
+# pip3 install bs4==4.4.1

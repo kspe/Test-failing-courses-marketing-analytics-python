@@ -1,4 +1,10 @@
-title: Course Title Here
-description: A description of the course.
+title: 'Marketing Analytics in Python: Cost of Acquisition and Lifetime Value'
+description: >-
+  Funnels and retention metrics form the backbone of marketing analytics. They
+  let you track who is successfully becoming an active customer, and who remains
+  an active customer over time. In this course, we'll learn how to compute the
+  Cost of Acquisition and Lifetime Value of customers using funnel and retention
+  analysis in python. You'll finish this course with the knowledge to track
+  customers from leads to customers to repeat customers.
 programming_language: python
-from: python-base-prod:21
+from: "python-base-prod:20"

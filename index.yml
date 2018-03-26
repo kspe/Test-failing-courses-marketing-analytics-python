@@ -1,0 +1,505 @@
+course_title: 'Marketing Analytics in Python: Cost of Acquisition and Lifetime Value'
+course_description: >-
+  Funnels and retention metrics form the backbone of marketing analytics. They
+  let you track who is successfully becoming an active customer, and who remains
+  an active customer over time. In this course, we'll learn how to compute the
+  Cost of Acquisition and Lifetime Value of customers using funnel and retention
+  analysis in python. You'll finish this course with the knowledge to track
+  customers from leads to customers to repeat customers.
+programming_language: python
+chapters:
+  - chapter_title: Cost of Acquisition and Lifetime Value
+    chapter_description: >-
+      Define onboarding funnels, cost of acquisition, and lifetime value.
+      Discuss the transition from event logs, which describe particular actions,
+      to rollups per user and ultimately to a funnel. We also introduce the idea
+      of success and retention actions.
+    exercises:
+      - type: VideoExercise
+        title: Welcome to the Course!
+        content: >-
+          Define Marketing Funnel and Cost of Acquisition, and motivate that we
+          can use them to identify problem areas in signup. 
+      - type: MultipleChoiceExercise
+        title: Cost of Acquisition
+        content: >-
+          Which of these is a description of Cost of Acquisition as described in
+          the video?
+      - type: NormalExercise
+        title: Import Data
+        content: Import sample data into a DataFrame using read_csv.
+      - type: NormalExercise
+        title: Select all data for a single user
+        content: >-
+          User row filtering to identify all rows for a particular user
+          identifier, sorted by time.
+
+
+          intermediate = df[df.UserId == 'sample-id']
+
+          intermediate.sort_values
+      - type: VideoExercise
+        title: Marketing Funnel as a Series of Steps
+        content: >-
+          Introduce the funnel for a subscription service and talk about the
+          steps required to go from lead to success. Link these to events in the
+          event logs.
+      - type: NormalExercise
+        title: Filter data to identify steps in the funnel
+        content: >-
+          The key thing here is removing a redundant logging step. There will be
+          some steps that are too granular and can be removed.
+
+
+          df_filtered = df[df.Event != 'badEvent']
+      - type: NormalExercise
+        title: Find a user who completed the funnel
+        content: >-
+          Decide on success event, identify the first user who completed that
+          event. The user has to do a few things here:
+
+          decide on an end event (and set it to a variable)
+
+          use that variable to filter to success events
+
+          use that filtered set to identify a single user.
+      - type: VideoExercise
+        title: Defining Retention and Lifetime Value
+        content: >-
+          Shift gears from onboarding to retention of successfully onboarded
+          users.
+
+
+          The definition of "retained" depends on the context. In a subscription
+          model, we can either focus on continuing to pay subscriptions or on
+          continuing to do a high value event. High value events are preferred
+          because they are a leading indicator, whereas subscription is a
+          lagging indicator because by the time it happens it's too late.
+
+
+          In an ecommerce or transactional system, the retention event is often
+          repeated successful use.
+
+
+          Describe that we use the retention definition to identify whether each
+          user was retained in a particular time period.
+      - type: MultipleChoiceExercise
+        title: Retention in a subscription business
+        content: >
+          Which of these is not a good retention event in a subscription music
+          business like Pandora or Spotify?
+
+
+          List a few events:
+
+          Subscription paid
+
+          Listen to song
+
+          Add station
+
+          Open application
+      - type: MultipleChoiceExercise
+        title: Retention in an ecommerce business
+        content: |-
+          Which of these is a good retention event in an ecommerce business?
+
+          List a few events:
+          Pay for item
+          Add to cart
+          Search for item
+          Land on landing page
+      - type: NormalExercise
+        title: Filter to retention events
+        content: |-
+          Identify retention events in the data set and filter to them.
+
+          df[df.Event == 'Completed']
+      - type: NormalExercise
+        title: Was this user retained?
+        content: >-
+          What is the last time that a sample user was retained? 
+
+
+          I'll give the user a sample id and have them identify all success
+          events for that user, then list the last such event.
+  - chapter_title: Funnel Analysis with Pivot Tables
+    chapter_description: >-
+      Learn how to analyze the success rate of each step in a funnel. This
+      chapter will focus on pivot tables on Pandas data frames. We'll also
+      discuss how to present and plot a funnel analysis.
+    exercises:
+      - type: VideoExercise
+        title: Introducing the pivot_table command
+        content: >-
+          Introduce the chapter, discuss the end goal (to compute the completion
+          rate) and discuss the pivot_table command in pandas. We will include
+          an example of pivot_table in the video.
+      - type: NormalExercise
+        title: 'Create a pivot table '
+        content: >-
+          Create a pivot table on user and event. Use the len function as
+          aggfunc to determine whether each user did each event.
+      - type: NormalExercise
+        title: Verify the pivot table output for one user
+        content: >-
+          Find raw data corresponding to a single row in the pivot table. 
+
+
+          Filter the raw data to a particular user and see that each row in the
+          raw data shows up in one of the counts in the pivot table.
+      - type: VideoExercise
+        title: Compute funnel completion using sum
+        content: >-
+          We need to aggregate our data, which has one row per user, to data
+          that has one row per event. We'll do this using the sum function on
+          our dataframe. 
+
+
+          Also introduce the idea of converting a table from ints to Booleans
+          using df > 0
+      - type: NormalExercise
+        title: Compute funnel using sum
+        content: >-
+          Use sum function from the video to compute the number of users (not
+          events) at each step.
+      - type: NormalExercise
+        title: Reorder the output columns
+        content: >-
+          Use a column multi-select to reorder the output from the default
+          ordering (alphabetical) to the correct funnel order.
+      - type: NormalExercise
+        title: Normalize the output to compute funnel completion rate
+        content: |-
+          Divide by the number of people in first step.
+
+          funnel_output / funnel_output['start_event']
+      - type: VideoExercise
+        title: Plotting the funnel completion using Pandas
+        content: >-
+          Pandas includes basic plotting functions that can be used to quickly
+          visualize a Series or DataFrame. Discuss line charts and bar charts.
+          You should use a line chart of there is a numerical relationship
+          between the x-axis columns. An example would be percent of people
+          working in each hour of the day. If the x-axis doesn't have a
+          numerical relationship, use a bar chart.
+      - type: MultipleChoiceExercise
+        title: Why should we use a bar chart?
+        content: 'Select reason we should use a bar chart, not line chart, for funnels.'
+      - type: NormalExercise
+        title: Create a bar chart from the funnel output
+        content: >-
+          Use pandas built-in bar charts to create a bar chart that shows the
+          ratio of users completing each step. 
+      - type: NormalExercise
+        title: Finish chart by adding axis labels and title
+        content: >-
+          Use the title and ylabel functions to add a sensible title and y-axis
+          label to the chart.
+      - type: VideoExercise
+        title: Time to completion
+        content: >-
+          Introduce the idea of a leading and lagging indicator, and explain
+          that our funnel analysis is a lagging indicator. One potential leading
+          indicator is to compute the time taken to complete a funnel. To
+          compute this, we'll use a min as the aggfunc and Timestamp as the
+          column. Compute time difference between first start event and first
+          end event, and plot a histogram of start times.
+      - type: NormalExercise
+        title: Filter to users who completed the funnel
+        content: Use filtering to remove rows with n/a for completion event.
+      - type: NormalExercise
+        title: 'Find the first time a user took each action '
+        content: Switch aggfunc to min and value to Timestamp column.
+      - type: NormalExercise
+        title: Compute time difference between start and first complete
+        content: >-
+          This exercise requires two things. First, compute a new column
+          df['Timediff'] = df['Completed'] - df['Start']. 
+
+          Second, convert the timedelta Timediff to hours.
+      - type: NormalExercise
+        title: Plot a histogram of completion times
+        content: >-
+          Use pandas hist function on the time delta column to plot how long the
+          funnel takes.
+  - chapter_title: 'Lifetime Value: Computing Retention Rate'
+    chapter_description: >-
+      Once a lead has converted to a customer, we want to track how long we
+      retain them as a customer. The definition of retained depends on the kind
+      of business one is doing, but the analysis we will is applicable to many
+      definitions of retention. We'll discuss cohorts, or groups of users who
+      activate in the same time period, then we'll discuss retention rates
+      within subsequent time windows. Finally, we'll discuss how to estimate
+      lifetime value of a user from the customer retention rate.
+    exercises:
+      - type: VideoExercise
+        title: Introducing cohorts and retention time periods
+        content: >-
+          Introduce the new theoretical concepts in this chapter. The most
+          important new concept is computing cohorts by rounding timestamps down
+          to the nearest week or month. 
+      - type: NormalExercise
+        title: Filter data to include only activation event and retention events.
+        content: >-
+          Filter out events that aren't the actual activation event. This is
+          very similar to an exercise in chapter 1 and should be fast. 
+      - type: NormalExercise
+        title: Add a column for year and month
+        content: |-
+          Discretize time using strptime and make a new column.
+
+          df['yearmonth'] = df.timestamp.apply(lambda x: x[:7])
+      - type: NormalExercise
+        title: Compute cohort period using groupby and agg
+        content: >-
+          Compute a new dataframe that contains the first discrete timeframe per
+          user.
+
+
+          df_cohort = df.groupby('user_id').agg({'yearmonth': min})
+
+          df_cohort.columns = ['cohort']
+
+          df_cohort.reset_index()  # this makes the merge below easier to
+          conceptualize.
+      - type: NormalExercise
+        title: Compute retention table
+        content: >-
+          Use a pivot_table with cohort as the index, retention period as the
+          columns, and count of distinct users as the aggfunc and value.
+      - type: VideoExercise
+        title: Make a retention table using the merge function
+        content: >-
+          Describe two data sets: original data with one row per event and the
+          new data with one row per user.
+
+
+          Introduce merge. Explain that we'll combine rows from the two data
+          sets.
+
+          Explain using pivot table to compute retention. Index is cohort period
+          and columns are yearmonth
+      - type: NormalExercise
+        title: Merge two data sets
+        content: |-
+          df_merged = df.merge(df_cohort, on='user_id')
+
+          Verify that the output has the cohort for each user
+      - type: NormalExercise
+        title: Pivot table to produce a cohort table
+        content: >-
+          df_merged.pivot_table(index='cohort', columns='yearmonth',
+          aggfunc=len, values='user_id')
+      - type: VideoExercise
+        title: Computing average retention
+        content: >-
+          Steep dropoff in first cohort cycle followed by more shallow dropoff.
+          This is common.
+
+          Non-zero in upper right, but this means that average retention in
+          every month is misleading. It's better to compute retention by
+          normalizing dates. Explain what that is and why it matters.
+
+
+          Python concepts: using a custom function in an apply.
+      - type: NormalExercise
+        title: Normalize dates in the original data
+        content: >-
+          Use datetime subtraction to normalize dates. This will require writing
+          a function that we use in apply.
+      - type: NormalExercise
+        title: Create table with time from activation as the y-axis
+        content: Similar to pivot table above.
+      - type: NormalExercise
+        title: Plotting retention curves
+        content: |-
+          Use line chart to plot each retention curve.
+
+          Update axis and title
+      - type: MultipleChoiceExercise
+        title: Interpreting the retention chart
+        content: >-
+          The data will show retention increasing over time. Multiple choice
+          will include options:
+
+
+          3-month retention has gone down over time
+
+          3-month retention has increased over time
+
+          3-month retention is about the same
+
+          12-month retention is down over time [impossible to measure since
+          should only have 1 data point at that retention level]
+      - type: VideoExercise
+        title: 'Presenting Retention Analysis: Curves and LTV'
+        content: >-
+          Review the retention curves. Point out how to identify changes in the
+          curve over time.
+
+
+          Introduce lifetime value and how to compute it. 
+
+
+          LTV is the expected total profit from a customer. We'll discuss it for
+          subscription models, where revenue is fixed per customer in a cycle.
+          In this model, LTV is simply number of months of revenue generated
+          times monthly fee.
+
+
+          To compute expected retention period, use 1 / churn rate.
+      - type: NormalExercise
+        title: 'Compute Churn rate excluding first '
+        content: Compute the average churn rate for the retention funnel.
+      - type: NormalExercise
+        title: Compute LTV
+        content: >-
+          Assuming a value of $15/month, what is the expected LTV in this
+          funnel?
+  - chapter_title: Understanding Customer Sources
+    chapter_description: >-
+      Discover which sources of data are producing valuable customers. 
+
+
+      This chapter will introduce customer acquisition data and cost of
+      acquisition, funnels by channel, and LTV as a function of cost of
+      acquisition. We'll primarily discuss the merge function in pandas.
+    exercises:
+      - type: VideoExercise
+        title: Tracking customer source through the funnel.
+        content: >-
+          Discuss the basic idea of tagging a user and building a data set of
+          acquisition channel per user.
+
+
+          There are many companies doing this work, particularly in conjunction
+          with ad sales. Examples are Facebook and Google.
+
+
+          While these companies provide many interesting features, it's
+          important to understand both the basic idea behind customer source
+          tracking and to develop tools we can use for any acquisition channel.
+
+
+          The core data requirement is a data set that includes user id and
+          source information. Other useful information like cost of ad click
+          could be included if it's available.
+
+
+          In this section, we'll start with acquisition channel then move to
+          paid acquisition.
+      - type: NormalExercise
+        title: Extract source data from raw URLs
+        content: >-
+          One common source of data in the web is http referrer field, which
+          tracks the URL that a user was on when they clicked on your page. Use
+          string functions (hint: split and indexing) to identify the site that
+          a user came from.
+      - type: NormalExercise
+        title: Use Apply Function to apply a function to every row
+        content: >-
+          Using the string cleanup logic from previous exercise, use the
+          DataFrame.apply function to apply those changes to every row in the
+          frame.
+      - type: NormalExercise
+        title: Extract paid clicks
+        content: >-
+          Explain that some urls are evidence of a paid ad. Create a function
+          that identifies whether the string is a boolean ad. Use apply to run
+          this function on every referrer.
+      - type: VideoExercise
+        title: Joining acquisition data to the funnel
+        content: >-
+          Explain that event data will have a user id, but it will not have
+          attribution data on every row. 
+
+
+          However, some rows will have attribution data. It's common to extract
+          this data into an attribution data set.
+
+
+          We can join the attribution data to our funnel data using the merge
+          function.
+      - type: NormalExercise
+        title: Extract acquisition data from raw funnel logs.
+        content: >-
+          Introduce new data set, which is the same as data in Chapter 2 but
+          includes referrer information when available. Exercise is to filter to
+          only rows that have funnel data.
+      - type: NormalExercise
+        title: Merge the data to user-aggregated step of the funnel
+        content: >-
+          df.merge(small_df) using left join. The key thing here is to merge at
+          right place: you have to merge to UserId
+      - type: NormalExercise
+        title: 'Finish the funnel, grouping by acquisition source. '
+        content: >-
+          Instead of just sum, must use groupby then agg(sum) on the pivoted
+          data.
+
+
+          This will produce a long tail of sources.
+      - type: NormalExercise
+        title: Clean aggregation source
+        content: >-
+          This exercise is a repeat of 7 and 8, but before merging, add an apply
+          function that classifies incoming source as either google, facebook,
+          paid ad (using definition from earlier exercise) or "other"
+
+
+          Outcome is a set of 4 funnels.
+      - type: VideoExercise
+        title: 'Thinking about funnel sources: good leads vs plentiful leads'
+        content: >-
+          Some user sources may provide many but low value users. Other sources
+          may have few but high value users. Introduce cost of acquisition,
+          which helps us determine the cost of getting a paying user.
+
+
+          Cost of acquisition for a channel is the amortized cost of acquiring a
+          user from that channel including money spent on leads that didn't
+          convert. So a channel with higher conversion rates can be a better
+          deal.
+
+
+          To compute this, we need to introduce costs. We'll work with sample
+          data from Facebook and Google ad spends, broken out by campaign. We'll
+          focus on CPC data, which means you only paid for a user that clicked
+          your ad.
+      - type: NormalExercise
+        title: Introducing ad data
+        content: >-
+          Introduce sample data set that includes columns for user, ad source,
+          ad cost, and ad campaign.
+
+
+          Exercise is to compute the average cost of each campaign using groupby
+          and agg.
+      - type: NormalExercise
+        title: Merge ad data to main data set
+        content: >-
+          Merge the ad data using df.merge on user id. Assume that any users who
+          don't have an ad click are organic traffic with zero cost. 
+      - type: NormalExercise
+        title: Compute cost of acquisition
+        content: >-
+          GroupBy channel to compute the cost of the channel (total spend on all
+          ads) and the number of sales.
+      - type: NormalExercise
+        title: Plot cost of acquisition per channel
+        content: >-
+          Create a bar chart using pandas bar chart (we had a bar chart earlier
+          - this is primarily so we repeat the idea)
+      - type: VideoExercise
+        title: Wrap Up
+        content: >-
+          Summarize the cost of acquisition flow. There are services that will
+          do this work for you, particularly services that sell ads. The
+          advantage of knowing how to do it in python is that you can combine
+          data from many individual sources.
+      - type: MultipleChoiceExercise
+        title: Interpret the acquisition channel
+        content: >-
+          There will be one channel with more leads but higher cost of
+          acquisition because it has a low funnel completion rate. 
