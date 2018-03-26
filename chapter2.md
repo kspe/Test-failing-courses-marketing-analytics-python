@@ -27,7 +27,7 @@ Introduce the chapter, discuss the end goal (to compute the completion rate) and
 //videos.datacamp.com/transcoded/000_placeholders/v1/hls-temp.master.m3u8
 ---
 
-## Create a pivot table 
+## Create a pivot table
 
 ```yaml
 type: NormalExercise
@@ -80,7 +80,7 @@ skills: 2
 key: 785c06a066
 ```
 
-Find raw data corresponding to a single row in the pivot table. 
+Find raw data corresponding to a single row in the pivot table.
 
 Filter the raw data to a particular user and see that each row in the raw data shows up in one of the counts in the pivot table.
 
@@ -125,7 +125,7 @@ skills: 2
 key: bf7b2a24d6
 ```
 
-We need to aggregate our data, which has one row per user, to data that has one row per event. We'll do this using the sum function on our dataframe. 
+We need to aggregate our data, which has one row per user, to data that has one row per event. We'll do this using the sum function on our dataframe.
 
 Also introduce the idea of converting a table from ints to Booleans using df > 0
 
@@ -276,7 +276,7 @@ type: VideoExercise
 lang: python
 xp: 50
 skills: 2
-key: 581ffd1626
+key: '581ffd1626'
 ```
 
 Pandas includes basic plotting functions that can be used to quickly visualize a Series or DataFrame. Discuss line charts and bar charts. You should use a line chart of there is a numerical relationship between the x-axis columns. An example would be percent of people working in each hour of the day. If the x-axis doesn't have a numerical relationship, use a bar chart.
@@ -331,7 +331,7 @@ skills: 2
 key: b70b042920
 ```
 
-Use pandas built-in bar charts to create a bar chart that shows the ratio of users completing each step. 
+Use pandas built-in bar charts to create a bar chart that shows the ratio of users completing each step.
 
 `@instructions`
 
@@ -471,7 +471,7 @@ Use filtering to remove rows with n/a for completion event.
 ```
 ---
 
-## Find the first time a user took each action 
+## Find the first time a user took each action
 
 ```yaml
 type: NormalExercise
@@ -524,7 +524,7 @@ skills: 2
 key: 5e9be68f3c
 ```
 
-This exercise requires two things. First, compute a new column df['Timediff'] = df['Completed'] - df['Start']. 
+This exercise requires two things. First, compute a new column df['Timediff'] = df['Completed'] - df['Start'].
 Second, convert the timedelta Timediff to hours.
 
 `@instructions`
