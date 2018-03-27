@@ -276,7 +276,7 @@ type: VideoExercise
 lang: python
 xp: 50
 skills: 2
-key: '581ffd1626'
+key: 581ffd1627
 ```
 
 Pandas includes basic plotting functions that can be used to quickly visualize a Series or DataFrame. Discuss line charts and bar charts. You should use a line chart of there is a numerical relationship between the x-axis columns. An example would be percent of people working in each hour of the day. If the x-axis doesn't have a numerical relationship, use a bar chart.
